@@ -76,6 +76,8 @@ public class PeopleController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddPerson(PersonCreateDTO person)
     {
+        _logger.LogInformation(person.Name);
+        _logger.LogInformation(person.Email);
         try
         {
             Person createdPerson = await _personService.AddPersonAsync(person.ToPerson());
@@ -88,7 +90,7 @@ public class PeopleController : ControllerBase
         }
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> UpdatePerson(int id, [FromBody] PersonUpdateDTO personToUpdate)
     {
         try

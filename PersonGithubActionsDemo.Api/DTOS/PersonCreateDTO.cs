@@ -5,12 +5,14 @@ namespace PersonGithubActionsDemo.Api.DTOS;
 public class PersonCreateDTO
 {
     [Required]
-    [Range(2, 20)]
-    public string Name { get; } = string.Empty;
+    [MinLength(4)]
+    [MaxLength(20)]
+    public string Name { get; set; } = string.Empty;
 
-    [Range(4, 20)]
+    [MinLength(1)]
+    [MaxLength(20)]
     [EmailAddress]
-    public string Email { get; } = string.Empty;
+    public string Email { get; set; } = string.Empty;
 
 
     public PersonCreateDTO(string name, string email)

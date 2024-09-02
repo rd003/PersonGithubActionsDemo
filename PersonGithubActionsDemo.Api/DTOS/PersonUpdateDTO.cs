@@ -7,12 +7,14 @@ public class PersonUpdateDTO
     public int Id { get; set; }
 
     [Required]
-    [Range(2, 20)]
-    public string Name { get; }
+    [MinLength(4)]
+    [MaxLength(20)]
+    public string Name { get; set; } = string.Empty;
 
-    [Range(4, 20)]
+    [MinLength(1)]
+    [MaxLength(20)]
     [EmailAddress]
-    public string Email { get; }
+    public string Email { get; set; } = string.Empty;
 
 
     public PersonUpdateDTO(int id, string name, string email)
