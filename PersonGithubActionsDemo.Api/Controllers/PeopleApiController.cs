@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using PersonGithubActionsDemo.Api.Domain;
 using PersonGithubActionsDemo.Api.DTOS;
 using PersonGithubActionsDemo.Api.Extensions;
 using PersonGithubActionsDemo.Api.Services;
@@ -44,6 +45,26 @@ public class PeopleController : ControllerBase
                 return NotFound();
             }
             return Ok(person);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeletePerson(int id)
+    {
+        try
+        {
+            Person? person = await _personService.GetPersonAsync(id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            await _personService.DeletePersonAsync(person);
+            return NoContent();
         }
         catch (Exception ex)
         {
