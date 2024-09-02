@@ -72,4 +72,44 @@ public class PeopleController : ControllerBase
             return StatusCode(500, ex.Message);
         }
     }
+
+    [HttpPost]
+    public async Task<IActionResult> AddPerson(PersonCreateDTO person)
+    {
+        try
+        {
+            Person createdPerson = await _personService.AddPersonAsync(person.ToPerson());
+            return CreatedAtAction(nameof(GetPerson), new { id = createdPerson.Id }, createdPerson.ToPersonReadDto());
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdatePerson(int id, [FromBody] PersonUpdateDTO personToUpdate)
+    {
+        try
+        {
+            if (id != personToUpdate.Id)
+            {
+                return BadRequest("Id mismatch");
+            }
+            Person? person = await _personService.GetPersonAsync(id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            await _personService.UpdatePersonAsync(personToUpdate.ToPerson());
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.Message);
+            return StatusCode(500, ex.Message);
+        }
+    }
+
 }
