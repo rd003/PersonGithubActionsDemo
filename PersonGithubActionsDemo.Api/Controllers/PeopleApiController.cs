@@ -78,6 +78,7 @@ public class PeopleController : ControllerBase
     {
         try
         {
+            _logger.LogInformation(person.Name);
             Person createdPerson = await _personService.AddPersonAsync(person.ToPerson());
             return CreatedAtRoute(nameof(GetPerson), new { id = createdPerson.Id }, createdPerson.ToPersonReadDto());
         }
