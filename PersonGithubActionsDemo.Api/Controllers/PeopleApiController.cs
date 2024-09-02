@@ -76,12 +76,10 @@ public class PeopleController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddPerson(PersonCreateDTO person)
     {
-        _logger.LogInformation(person.Name);
-        _logger.LogInformation(person.Email);
         try
         {
             Person createdPerson = await _personService.AddPersonAsync(person.ToPerson());
-            return CreatedAtAction(nameof(GetPerson), new { id = createdPerson.Id }, createdPerson.ToPersonReadDto());
+            return CreatedAtRoute(nameof(GetPerson), new { id = createdPerson.Id }, createdPerson.ToPersonReadDto());
         }
         catch (Exception ex)
         {
@@ -113,5 +111,6 @@ public class PeopleController : ControllerBase
             return StatusCode(500, ex.Message);
         }
     }
+
 
 }
