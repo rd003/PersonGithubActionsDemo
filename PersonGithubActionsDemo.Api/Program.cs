@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using PersonGithubActionsDemo.Api.Data;
+using PersonGithubActionsDemo.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<PersonContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("default")));
+
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 var app = builder.Build();
 
