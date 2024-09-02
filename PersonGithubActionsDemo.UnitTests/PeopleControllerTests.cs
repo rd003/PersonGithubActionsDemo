@@ -140,20 +140,6 @@ public class PeopleControllerTests
         Assert.Equal(500, statusCodeResult.StatusCode);
     }
 
-    // [Fact]
-    // public async Task AddPerson_ReturnsStatusCodeResult_WhenPersonValidationFails()
-    // {
-    //     // Arrange
-    //     var personCreateDTO = new PersonCreateDTO(string.Empty, "john@example.com");
-
-    //     // Act
-    //     var result = await _controller.AddPerson(personCreateDTO);
-
-    //     // Assert
-    //     var objectResult = Assert.IsType<ObjectResult>(result);
-    //     Assert.Equal(400, objectResult.StatusCode);
-    // }
-
     [Fact]
     public async Task UpdatePerson_ReturenNoContent_WhenPersonUpdated()
     {
