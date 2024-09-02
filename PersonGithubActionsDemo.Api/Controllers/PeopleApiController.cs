@@ -25,7 +25,7 @@ public class PeopleController : ControllerBase
         try
         {
             var people = (await _personService.GetPeopleAsync()).Select(p => p.ToPersonReadDto()).ToList();
-            return Ok(people);
+            return Ok();
         }
         catch (Exception ex)
         {
