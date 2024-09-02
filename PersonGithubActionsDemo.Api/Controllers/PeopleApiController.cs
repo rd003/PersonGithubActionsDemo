@@ -25,7 +25,7 @@ public class PeopleController : ControllerBase
         try
         {
             var people = (await _personService.GetPeopleAsync()).Select(p => p.ToPersonReadDto()).ToList();
-            return Ok();
+            return Ok(people);
         }
         catch (Exception ex)
         {
@@ -78,7 +78,6 @@ public class PeopleController : ControllerBase
     {
         try
         {
-            //_logger.LogInformation(person.Name);
             Person createdPerson = await _personService.AddPersonAsync(person.ToPerson());
             return CreatedAtRoute(nameof(GetPerson), new { id = createdPerson.Id }, createdPerson.ToPersonReadDto());
         }
