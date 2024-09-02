@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonGithubActionsDemo.Api", "PersonGithubActionsDemo.Api\PersonGithubActionsDemo.Api.csproj", "{E3422189-91E4-422C-9353-E2F46B11370B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonGithubActionsDemo.UnitTests", "PersonGithubActionsDemo.UnitTests\PersonGithubActionsDemo.UnitTests.csproj", "{53DE6EBA-D598-41C7-96F0-301856B7FF1E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3422189-91E4-422C-9353-E2F46B11370B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3422189-91E4-422C-9353-E2F46B11370B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3422189-91E4-422C-9353-E2F46B11370B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3422189-91E4-422C-9353-E2F46B11370B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53DE6EBA-D598-41C7-96F0-301856B7FF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53DE6EBA-D598-41C7-96F0-301856B7FF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53DE6EBA-D598-41C7-96F0-301856B7FF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53DE6EBA-D598-41C7-96F0-301856B7FF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
