@@ -1,9 +1,5 @@
 using System.Text.Json;
-using Microsoft.Extensions.DependencyInjection;
-using PersonGithubActionsDemo.Api.Data;
-using PersonGithubActionsDemo.Api.Domain;
 using PersonGithubActionsDemo.Api.DTOS;
-using PersonGithubActionsDemo.Api.Services;
 
 namespace PersonGithubActionsDemo.IntegrationTests;
 
@@ -22,7 +18,6 @@ public class PeopleControllerTests : IClassFixture<MyWebApplicationFactory<Progr
     public async Task GetPeople_ReturnsOkResponse()
     {
         // Arrange
-        await SeedTestDataAsync();
 
 
         //Act 
@@ -31,7 +26,13 @@ public class PeopleControllerTests : IClassFixture<MyWebApplicationFactory<Progr
         // Act
         response.EnsureSuccessStatusCode(); // Status Code 2xx
         var reponseString = await response.Content.ReadAsStringAsync();
-        var people = JsonSerializer.Deserialize<List<PersonReadDTO>>(reponseString);
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        var people = JsonSerializer.Deserialize<List<PersonReadDTO>>(reponseString,options);
+
+        // Assert
         Assert.NotNull(people);
         Assert.NotEmpty(people);
     }
@@ -40,43 +41,23 @@ public class PeopleControllerTests : IClassFixture<MyWebApplicationFactory<Progr
     public async Task GetPerson_ReturnsOk_WhenPersonExists()
     {
         // Arrange: 
-        await SeedTestDataAsync();
 
         // Act 
         var response = await _client.GetAsync("api/People/1");
 
         // Assert
         response.EnsureSuccessStatusCode(); // Status Code 2xx
+        // TODO: Copy response string
         var responseString = await response.Content.ReadAsStringAsync();
-        var person = JsonSerializer.Deserialize<PersonReadDTO>(responseString);
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        var person = JsonSerializer.Deserialize<PersonReadDTO>(responseString,options);
         Assert.NotNull(person);
         Assert.Equal(1, person.Id);
         Assert.Equal("John", person.Name);
         Assert.Equal("john@example.com", person.Email);
     }
-
-    private async Task SeedTestDataAsync()
-    {
-        using var scope = _factory.Services.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<PersonContext>();
-
-        // Ensure the database is created and clean before seeding
-        context.Database.EnsureDeleted();
-        context.Database.EnsureCreated();
-
-        // Seed data
-        var people = new List<Person>
-            {
-                new Person { Id = 1, Name = "John", Email = "john@example.com" },
-                new Person { Id = 2, Name = "Jane", Email = "jane@example.com" }
-            };
-
-        if (context.People.Any() == false)
-        {
-            context.People.AddRange(people);
-            await context.SaveChangesAsync();
-        }
-    }
-
 
 }

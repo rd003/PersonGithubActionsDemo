@@ -29,6 +29,7 @@ public class MyWebApplicationFactory<TEntryPoint> : WebApplicationFactory<Progra
             using var appContext = scope.ServiceProvider.GetRequiredService<PersonContext>();
             try
             {
+                appContext.Database.EnsureDeleted();
                 appContext.Database.EnsureCreated();
             }
             catch (Exception ex)
