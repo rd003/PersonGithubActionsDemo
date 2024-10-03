@@ -6,12 +6,12 @@ using PersonGithubActionsDemo.Api.DTOS;
 
 namespace PersonGithubActionsDemo.IntegrationTests;
 
-public class PeopleControllerTests : IClassFixture<MyWebApplicationFactory<Program>>
+public class PeopleControllerTests : IClassFixture<MyWebApplicationFactory>
 {
-    private readonly MyWebApplicationFactory<Program> _factory;
+    private readonly MyWebApplicationFactory _factory;
     private readonly HttpClient _client;
 
-    public PeopleControllerTests(MyWebApplicationFactory<Program> factory)
+    public PeopleControllerTests(MyWebApplicationFactory factory)
     {
         _factory = factory;
         _client = _factory.CreateClient();
