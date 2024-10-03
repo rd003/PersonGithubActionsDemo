@@ -6,7 +6,7 @@ using PersonGithubActionsDemo.Api.Data;
 
 namespace PersonGithubActionsDemo.IntegrationTests;
 
-public class MyWebApplicationFactory<TEntryPoint> : WebApplicationFactory<Program> where TEntryPoint : Program
+public class MyWebApplicationFactory : WebApplicationFactory<Program>
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
